@@ -1,0 +1,31 @@
+You are working on NoteFlow, an Expo SDK 54 React Native app written in TypeScript.
+
+Stack:
+- Expo Router for all navigation.
+- Gluestack UI v5 alpha concepts with UniWind and local design tokens.
+- Shopify FlashList for all long lists.
+- Zustand for global state.
+- AsyncStorage through Zustand persist for local persistence.
+- Zod for form validation.
+- React Native Reanimated for list animations.
+- Expo Haptics for tactile feedback.
+
+Project structure:
+- app/ contains file-based routes.
+- components/ contains reusable UI, cards, details and common screens.
+- constants/theme.ts contains visual tokens.
+- store/notesStore.ts contains all persisted global note state.
+- types/index.ts contains domain types and type guards.
+- docs/ contains project documentation.
+
+Coding rules:
+- Use functional components and hooks.
+- Keep state local with useState when it belongs to one screen.
+- Use Zustand selectors for global state. Do not add Context API for notes.
+- Do not replace FlashList with FlatList or ScrollView for tab lists.
+- Keep Date fields as Date objects in app code and rehydrate persisted dates.
+- Validate creation forms with Zod before writing to the store.
+- Respect light and dark themes from useColorScheme.
+- Use @expo/vector-icons for icons.
+- Keep UI native; do not use WebView for app screens.
+- Prefer small, focused components and explicit TypeScript types.
