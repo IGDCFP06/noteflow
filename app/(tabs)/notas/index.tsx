@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { AnimatedList } from '@/components/common/AnimatedList';
 import { NoteCard } from '@/components/items/NoteCard';
@@ -8,7 +8,8 @@ import { Note } from '@/types';
 
 export default function NotesTab() {
   const router = useRouter();
-  const notes = useNotesStore((state) => state.notes.filter((note) => !note.isArchived));
+  const allNotes = useNotesStore((state) => state.notes);
+  const notes = useMemo(() => allNotes.filter((note) => !note.isArchived), [allNotes]);
 
   const searchText = useCallback((note: Note) => `${note.title} ${note.content}`, []);
 

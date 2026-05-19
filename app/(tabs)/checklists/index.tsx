@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { AnimatedList } from '@/components/common/AnimatedList';
 import { ChecklistCard } from '@/components/items/ChecklistCard';
@@ -8,7 +8,8 @@ import { ChecklistNote } from '@/types';
 
 export default function ChecklistsTab() {
   const router = useRouter();
-  const checklists = useNotesStore((state) => state.checklists.filter((checklist) => !checklist.isArchived));
+  const allChecklists = useNotesStore((state) => state.checklists);
+  const checklists = useMemo(() => allChecklists.filter((checklist) => !checklist.isArchived), [allChecklists]);
 
   const searchText = useCallback(
     (checklist: ChecklistNote) => `${checklist.title} ${checklist.items.map((item) => item.text).join(' ')}`,

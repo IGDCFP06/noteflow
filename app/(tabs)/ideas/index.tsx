@@ -1,5 +1,5 @@
 import { useRouter } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { AnimatedList } from '@/components/common/AnimatedList';
 import { IdeaCard } from '@/components/items/IdeaCard';
@@ -8,7 +8,8 @@ import { IdeaNote } from '@/types';
 
 export default function IdeasTab() {
   const router = useRouter();
-  const ideas = useNotesStore((state) => state.ideas.filter((idea) => !idea.isArchived));
+  const allIdeas = useNotesStore((state) => state.ideas);
+  const ideas = useMemo(() => allIdeas.filter((idea) => !idea.isArchived), [allIdeas]);
 
   const searchText = useCallback((idea: IdeaNote) => `${idea.title} ${idea.tags.join(' ')}`, []);
 
